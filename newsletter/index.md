@@ -52,7 +52,7 @@ description: "Trailblazer is a high-level architecture for Ruby. The newsletter 
           <h2>Archive</h2>
           <ul>
 
-            <li><strong>January 2016</strong> Accessing the parent in Reform. Injecting additional objects into forms. Dry-validation integration. Trailblazer with Sinatra.</li>
+            <li><strong><a href="2016-january.html">January 2016</a></strong> January 2016 newsletter talks about Formular (new form builder for Ruby), dry-validation in Reform, Sinatra/TRB, cool but unknown features in Reform and upcoming talks in Europe and Australia.</li>
 
           </ul>
         </div>
