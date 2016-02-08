@@ -1,5 +1,5 @@
 ---
-layout: book
+layout: single_page
 title: "A New Architecture For Rails"
 description: "Trailblazer introduces new abstraction layers into Rails, gives developers structure and architectural guidance. This book teaches you how."
 imageurl: "http://trailblazer.to/images/3dbuch-freigestellt.png"

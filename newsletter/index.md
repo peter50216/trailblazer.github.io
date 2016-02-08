@@ -1,14 +1,27 @@
 ---
-layout: book
+layout: single_page
 title: "Our Newsletter"
 description: "Trailblazer is a high-level architecture for Ruby. The newsletter broadcasts hottest changes about its gems: Cells, Reform, Representable, Roar, Disposable, and more."
 ---
+
+<!-- Hero -->
+<div class="hero gems-hero">
+  <div class="hero-unit">
+    <div class="row">
+      <div class="columns">
+        <h1 id="project_title">
+          Newsletter
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="marketing-book book">
   <div class="row">
     <div class="columns">
       <div class="row">
-        <div class="columns medium-9 medium-centered">
+        <div class="columns medium-9">
           <!-- Begin MailChimp Signup Form -->
           <div id="mc_embed_signup">
             <form action="//trailblazerb.us8.list-manage.com/subscribe/post?u=bbe5021ab6fbdc94a16f0d036&amp;id=a69f6e4652" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -31,7 +44,7 @@ description: "Trailblazer is a high-level architecture for Ruby. The newsletter 
 
 
 
-          <!-- <a href="https://leanpub.com/trailblazer">
+<!--           <!-- <a href="https://leanpub.com/trailblazer">
           <img src="/images/3dbuch-freigestellt.png" />
           </a> -->
         </div>
