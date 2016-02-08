@@ -1,5 +1,5 @@
 ---
-layout: single_page
+layout: newsletter
 title: "Our Newsletter"
 description: "Trailblazer is a high-level architecture for Ruby. The newsletter broadcasts hottest changes about its gems: Cells, Reform, Representable, Roar, Disposable, and more."
 ---
