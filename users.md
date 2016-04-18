@@ -1,7 +1,7 @@
 ---
 layout: newsletter
 title: "Companies using Trailblazer"
-description: "Trailblazer is a high-level architecture for Ruby. Many companies base their software on it. And love it."
+description: "Many companies use the Trailblazer architecture in their software. And love it."
 ---
 
 # Companies using Trailblazer
