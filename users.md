@@ -26,7 +26,7 @@ description: "Many companies use the Trailblazer architecture in their software.
     </div>
 
     <div class="column medium-2">
-      <a href="http://mitimes.com">
+      <a href="http://www.mytappr.com/">
         <img src="/images/users/tappr.png" />
       </a>
     </div>
