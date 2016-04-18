@@ -1,5 +1,11 @@
 ##
 
+## Community
+
+Gitter channel
+Newsletter
+
+
 ## Trailblazer brings more abstraction layers
 
 Abstraction layers simplify implementing sets of functionality, allowing for separation of concerns.

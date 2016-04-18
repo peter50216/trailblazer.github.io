@@ -48,6 +48,20 @@
   height: 200px;
 }
 
+// FIXME: merge with .gems-hero?
+.hero.little-hero {
+  height: 200px;
+  @media #{$small-only} {
+    height: 150px;
+  }
+  .hero-unit {
+    height: 100px;
+  }
+
+  h1 {
+    font-size: rem-calc(45);
+  }
+}
 
 .hero.gems-hero {
   text-align: left;
