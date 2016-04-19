@@ -25,6 +25,12 @@ description: "Many companies use the Trailblazer architecture in their software.
       </a>
     </div>
 
+    <div class="column medium-2 logo-leveler">
+      <a href="http://wickedweasel.com/">
+        <img src="/images/users/ww.png" />
+      </a>
+    </div>
+
     <div class="column medium-2">
       <a href="http://www.mytappr.com/">
         <img src="/images/users/tappr.png" />
@@ -32,13 +38,18 @@ description: "Many companies use the Trailblazer architecture in their software.
     </div>
 
     <div class="column medium-2">
+      <a href="http://zertico.com/">
+        <img src="/images/users/zertico.png" />
+      </a>
     </div>
 
-    <div class="column medium-2">
+    <div class="column medium-2 logo-leveler">
+      <a href="http://serviceseeking.com.au/">
+        <img src="/images/users/serviceseeking.png" />
+      </a>
     </div>
 
-    <div class="column medium-2">
-    </div>
+
 
     <div class="column medium-2">
     </div>

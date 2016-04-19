@@ -5,6 +5,28 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
 
 ---
 
+<!-- Hero -->
+{% include hero.html %}
+
+<!-- About -->
+<section class="sub-section about">
+  <div class="row">
+    <div class="columns">
+        {% include about.html %}
+    </div>
+  </div>
+</section>
+
+<!--
+<div class="row">
+  <div class="columns">
+    <p class="text-center">
+      Check out who's using <a href="/users.html">Trailblazer in production →</a>
+    </p>
+  </div>
+</div>
+-->
+
 <div class="sub-section section-separator">
   <div class="row">
     <div class="columns">
