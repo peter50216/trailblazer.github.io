@@ -71,8 +71,8 @@ description: "Many companies use the Trailblazer architecture in their software.
 
 
     <div class="column medium-2 text-center">
-      <a href="http://www.mytappr.com/">
-        <img src="" />
+      <a href="http://yebo.com.br/">
+        <img src="/images/users/yebo.png" />
       </a>
     </div>
 
