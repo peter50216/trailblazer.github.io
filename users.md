@@ -19,39 +19,79 @@ description: "Many companies use the Trailblazer architecture in their software.
 <section class="sub-section credibility">
   <div class="row">
 
-    <div class="column medium-2">
+    <div class="column medium-2 text-center">
       <a href="http://mitimes.com">
         <img src="/images/users/mitimes.png" />
       </a>
     </div>
 
-    <div class="column medium-2 logo-leveler">
+    <div class="column medium-2 text-center logo-leveler">
       <a href="http://wickedweasel.com/">
         <img src="/images/users/ww.png" />
       </a>
     </div>
 
-    <div class="column medium-2">
+    <div class="column medium-2 text-center">
       <a href="http://www.mytappr.com/">
         <img src="/images/users/tappr.png" />
       </a>
     </div>
 
-    <div class="column medium-2">
+    <div class="column medium-2 text-center">
       <a href="http://zertico.com/">
         <img src="/images/users/zertico.png" />
       </a>
     </div>
 
-    <div class="column medium-2 logo-leveler">
+    <div class="column medium-2 text-center logo-leveler">
       <a href="http://serviceseeking.com.au/">
         <img src="/images/users/serviceseeking.png" />
       </a>
     </div>
 
+    <div class="column medium-2 text-center logo-leveler">
+      <a href="http://weareathlon.com/">
+        <img src="/images/users/athlon.png" />
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column medium-2 text-center logo-leveler">
+      <a href="http://localsearch.com.au/">
+        <img src="/images/users/localSearch.png" />
+      </a>
+    </div>
+
+    <div class="column medium-2 text-center">
+      <a href="http://microminimus.com">
+        <img src="/images/users/microminimus.png" />
+      </a>
+    </div>
 
 
-    <div class="column medium-2">
+    <div class="column medium-2 text-center">
+      <a href="http://www.mytappr.com/">
+        <img src="" />
+      </a>
+    </div>
+
+    <div class="column medium-2 text-center">
+      <a href="http://zertico.com/">
+        <img src="" />
+      </a>
+    </div>
+
+    <div class="column medium-2 text-center logo-leveler">
+      <a href="http://serviceseeking.com.au/">
+        <img src="" />
+      </a>
+    </div>
+
+    <div class="column medium-2 text-center logo-leveler">
+      <a href="http://weareathlon.com/">
+        <img src="" />
+      </a>
     </div>
   </div>
 </section>
