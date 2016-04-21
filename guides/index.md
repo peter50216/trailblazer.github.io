@@ -38,7 +38,7 @@ title: Trailblazer Guides
 
       <p>It takes only 20 minutes to understand the mechanics.</p>
       <p>
-        <a href="/guides/sinatra/getting-started.html">→ Check it out!</a>
+        <a href="/guides/trailblazer-in-20-minutes.html">→ Coming soon!</a>
       </p>
 
     </div>
