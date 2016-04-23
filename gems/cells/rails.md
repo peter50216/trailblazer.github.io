@@ -156,7 +156,7 @@ You might have to include cells' template gem into your **application's** `Gemfi
 You can use the `#t` helper.
 
 
-	require "cells/translation"
+	require "cell/translation"
 
 	class Admin::Comment::Cell < Cell::Concept
 	  include ActionView::Helpers::TranslationHelper
