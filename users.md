@@ -69,6 +69,11 @@ description: "Many companies use the Trailblazer architecture in their software.
       </a>
     </div>
 
+    <div class="column medium-2 text-center logo-leveler">
+      <a href="http://shaken.com/">
+        <img src="/images/users/shaken.png" />
+      </a>
+    </div>
 
     <div class="column medium-2 text-center">
       <a href="http://yebo.com.br/">
@@ -76,11 +81,6 @@ description: "Many companies use the Trailblazer architecture in their software.
       </a>
     </div>
 
-    <div class="column medium-2 text-center">
-      <a href="http://zertico.com/">
-        <img src="" />
-      </a>
-    </div>
 
     <div class="column medium-2 text-center logo-leveler">
       <a href="http://serviceseeking.com.au/">

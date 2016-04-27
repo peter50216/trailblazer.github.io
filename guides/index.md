@@ -1,6 +1,6 @@
 ---
 layout: foundation
-title: Trailblazer Guides
+title: Guides
 ---
 
 <div class="hero little-hero">
@@ -8,7 +8,7 @@ title: Trailblazer Guides
     <div class="row text-center">
       <div class="columns">
         <h1>
-          Trailblazer Guides
+          Guides
         </h1>
       </div>
     </div>
