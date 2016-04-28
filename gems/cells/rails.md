@@ -14,15 +14,12 @@ Cells can bundle their own assets in the cell's view directory. This is a very p
 
 It works with both engine cells and application cells.
 
-
-
 	├── cells
 	│   ├── comment_cell.rb
 	│   ├── comment
 	│   │   ├── show.haml
 	│   │   ├── comment.css
 	│   │   ├── comment.coffee
-
 
 
 You need to register the cells with bundled assets. Preferably, this happens in `config/application.rb` of the main application.
@@ -48,6 +45,37 @@ Likewise, you have to reference the cell's CSS files in `app/assets/application.
 
 	/*
 	 *= require comment
+	 */
+
+
+## Asset Pipeline With Trailblazer
+
+With Trailblazer, cells follow a different naming structure.
+
+	├── concepts
+	│   │   └── comment
+	│   │       ├── cell
+	│   │       │   ├── index.rb
+	│   │       │   └── show.rb
+	│   │       └── view
+	│   │           ├── index.haml
+	│   │           ├── show.haml
+	│   │           └── comment.scss
+
+The `comment` concept here will provide `Comment::Cell::Index` and `Comment::Cell::Show`. Both bundle their assets in the `comment/view` directory.
+
+To add this to Rails' asset pipeline, you need to reference one of the cell classes in `config/application.rb`.
+
+
+	class Application < Rails::Application
+	  # ..
+	  config.cells.with_assets = ["comment/cell/index"] # one of the two is ok.
+
+You still need to `require` the JS and CSS files. Here's an example for `app/assets/application.css`.
+
+
+	/*
+	 *= require comment # refers to concepts/comment/view/comment.scss
 	 */
 
 
