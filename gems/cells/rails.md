@@ -175,6 +175,22 @@ To achieve just that, you may append the engine's view path instead of overwriti
 
 You might have to include cells' template gem into your **application's** `Gemfile`. This will properly require the extension.
 
+## Engine Namespace Helpers
+
+If you need namespaced helpers, include the respective helper in your engine cell.
+
+```ruby
+module MyEngine
+  class CommentCell < Cell::ViewModel
+    include Engine.routes.url_helpers
+
+    def comment_url
+      link_to model.title, engine_specific_path_without_any_namespaces_needed
+    end
+  end
+end
+```
+
 
 	# application Gemfile
 	gem "cells-erb"
