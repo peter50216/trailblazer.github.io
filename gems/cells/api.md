@@ -464,13 +464,13 @@ Cells per default does no HTML escaping, anywhere. This is one of the reasons th
 Include `Escaped` to make property readers return escaped strings.
 
 
-  class CommentCell < Cell::ViewModel
-    include Escaped
-    property :title
-  end
+    class CommentCell < Cell::ViewModel
+      include Escaped
+      property :title
+    end
 
-  song.title                 #=> "<script>Dangerous</script>"
-  Comment::Cell.(song).title #=> &lt;script&gt;Dangerous&lt;/script&gt;
+    song.title                 #=> "<script>Dangerous</script>"
+    Comment::Cell.(song).title #=> &lt;script&gt;Dangerous&lt;/script&gt;
 
 
 Only strings will be escaped via the property reader.
@@ -478,15 +478,15 @@ Only strings will be escaped via the property reader.
 You can suppress escaping manually.
 
 
-  def raw_title
-    "#{title(escape: false)} on the edge!"
-  end
+    def raw_title
+      "#{title(escape: false)} on the edge!"
+    end
 
 
 Of course, this works in views, too.
 
 
-  <%= title(escape: false) %>
+    <%= title(escape: false) %>
 
 
 ## Context Object
