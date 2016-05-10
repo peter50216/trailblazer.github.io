@@ -113,7 +113,7 @@ The result of the block will be automatically assigned to the form for you. Note
 
 While the `:populate_if_empty` option is only called when no matching form was found for the input, the `:populator` option is always invoked and gives you maximum flexibility for population. They're exclusive, you can only use one of the two.
 
-Aain, note that populators won't be invoked if there's no incoming fragment(s) for the populator's property.
+Again, note that populators won't be invoked if there's no incoming fragment(s) for the populator's property.
 
 ## Populator: Collections
 
