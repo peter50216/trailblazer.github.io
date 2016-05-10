@@ -118,3 +118,10 @@ concept("comment/cell/new", op.model, layout: Gemgem::Cell::Layout)
 ```
 
 This will render the `Comment::Cell::New`, instantiate `Gemgem::Cell::Layout` and pass through the context object, then render the layout around it.
+
+Make sure the content cell is prepared to use the layout cell.
+
+```ruby
+class Comment::Cell::New < Trailblazer::Cell
+  include Layout::External
+```
