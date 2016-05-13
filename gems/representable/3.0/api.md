@@ -613,7 +613,7 @@ Instead of explicitly defining representers for collections using a ["lonely col
 Rendering a collection of objects comes for free, using `for_collection`.
 
     songs = Song.all
-    SongRepresenter.new(songs).for_collection).to_json
+    SongRepresenter.new(songs).for_collection.to_json
     #=> '[{"title": "Sevens"}, {"title": "Eric"}]'
 
 For parsing, you need to provide the class for the nested items. This happens via `collection_representer
