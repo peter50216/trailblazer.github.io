@@ -134,6 +134,8 @@ Be warned, though, that those validators write to the model instance. Even thoug
 
 This is not Reform's fault but a design flaw in ActiveRecord's validators.
 
+# Unique Validation
+
 You're encouraged to use Reform's non-writing `unique: true` validation, though.
 
 
@@ -145,7 +147,15 @@ You're encouraged to use Reform's non-writing `unique: true` validation, though.
     end
 
 
-This will only validate the uniqueness of `title`. Other options are not supported, yet. Feel free to [help us here](https://github.com/apotonick/reform/blob/master/lib/reform/form/validation/unique_validator.rb)!
+This will only validate the uniqueness of `title`.
+
+For uniqueness validation of multiple fields, use the `:scope` option.
+
+```ruby
+validates :user_id, unique: { scope: [:user_id, :song_id] }
+```
+
+Feel free to [help us here](https://github.com/apotonick/reform/blob/master/lib/reform/form/validation/unique_validator.rb)!
 
 ## Confirm Validation
 
