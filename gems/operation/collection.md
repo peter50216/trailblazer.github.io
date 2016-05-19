@@ -23,24 +23,20 @@ This operation won't need a contract, as it is presentation, only.
 
 ## Presenting Collections
 
-You can either instantiate the collection operation manually.
-
+You can instantiate the collection operation manually.
 
 	op = Comment::Index.present(params)
 	op.model #=> [<Comment>, ..]
 
+Or use the `present` controller helper.
 
-Or you can use the `Controller#collection` helper to do that in the controller.
+```ruby
+def index
+  present Comment::Index
+end
+```
 
-
-	class CommentsController < ApplicationController
-	  def index
-	    collection Comment::Index
-	  end
-
-
-This will set the `@collection` instance variable.
-
+This will set the `@model` instance variable to your collection.
 
 ## Pagination
 
