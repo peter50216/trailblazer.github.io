@@ -113,7 +113,7 @@ Note that no `@form` is instantiated and assigned to the controller. If you need
 To render the operation's form, use `#form`. This is identical to `#present` with two additional steps.
 
     class CommentsController < ApplicationController
-      def show
+      def new
         form Comment::Create
       end
     end
