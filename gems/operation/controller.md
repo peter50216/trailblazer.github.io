@@ -40,7 +40,7 @@ Use `#run` to invoke the operation.
       end
     end
 
-This _runs_ the operation with `params`, sets `@operation` and `@model` on the controller instance, and returns the operation instance.
+This _runs_ the operation with `params`, sets `@operation`, `@model` and `@form` on the controller instance, and returns the operation instance.
 
 Note that you can grab the operation and reassign it to another instance variable if you have multiple operation invocations.
 
@@ -57,6 +57,7 @@ The call stack in `#run` is as follows.
       result, op = Comment::Create.run(params)
       @operation = op
       @model     = op.model
+      @form      = op.contract
 
 First, you have the chance to normalize parameters. The controller's `params` hash is then passed into the operation run. After that, operation and model are assigned to controller instance variables.
 
