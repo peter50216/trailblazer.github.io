@@ -10,7 +10,7 @@ An operation is a service object.
 
 Operations implement functions of your application, like creating a comment, following a user or exporting a PDF document. Sometimes this is also called _command_.
 
-![](/images/diagrams/stack.png)
+<img src="/images/diagrams/stack.png" style="width: 70%">
 
 Technically, an operation embraces and orchestrates all business logic between the controller dispatch and the persistance layer. This ranges from tasks as finding or creating a model, validating incoming data using a form object to persisting application state using model(s) and dispatching post-processing callbacks or even nested operations.
 

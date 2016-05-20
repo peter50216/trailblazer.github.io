@@ -1,40 +1,58 @@
 ---
 layout: operation
-title: Trailblazer in 20 Minutes
+title: Trailblazer In 20 Minutes (Maybe Less)
 ---
 
-# Trailblazer in 20 minutes
+# Trailblazer In 20 Minutes (Maybe Less)
 
-This guide only describes a *Create* operation. The same applies to all kinds of other functions, such as updating or deleting. We only had 20 minutes.
+Understanding the essential elements of Trailblazer and its *high-level architecture* doesn't take longer than 20 minutes. Once you leave the "MVC" mindset and allow Trailblazer to show how it restructures where code sits and how components interact, it is just another stack in your repertoire.
 
+Be aware that this guide describes a *Create* operation, only. The discussed concepts apply to all kinds of other functions, such as updating or deleting.
 
-Announcing itself as a *High-Level Architecture*, Trailblazer aims to help software teams to implement the actual business logic of their applications.
+We hope you like it!
 
-In Trailblazer, we understand business logic as anything that happens after intercepting the HTTP request, and returning a response document.
+## High-Level Architecture
+
+Announcing itself as a *High-Level Architecture*, Trailblazer aims to help software teams to implement the actual business logic of their applications. We understand business logic as anything that happens after intercepting the HTTP request, and before returning a response document.
 
 Trailblazer leaves dealing with HTTP and instructing the rendering up to the *infrastructure framework*: This could be any library you like, Rails, Hanami, Sinatra or Roda.
 
-Business code is encapsulates into *operations*, the fundamental and pivotal element in Trailblazer. Operations gently force you to decouple your application code from the framework. This is why your code ideally doesn't care about the underlying framework anymore.
+Business code is encapsulated into *operations*, the fundamental and pivotal element in Trailblazer. **Operations gently force you to decouple your application code from the framework.** This is why your code ideally doesn't care about the underlying framework anymore.
 
 
 ## Flow
 
-A typical business workflow is structured into five steps.
+In a web environment, user actions are processed via requests. Each typical business workflow in a request is structured into five steps.
 
-* Deserialization
-* Validatio
-* Persistence
-* Post-Processing (aka callbacks)
-* Rendering
+<div class="row">
+  <div class="column medium-6">
+    <img class="img" src="/images/diagrams/high-level.jpg">
+  </div>
 
+  <div class="column medium-6">
+    <p>
+      Have a look at the diagram's left-hand side. This is what each request needs to handle.
+    </p>
 
-NOTE ABOUT DIFFERENT LAYERS (new abstractions, exciting!!!!)
+    <ul>
+      <li>Deserialization</li>
+      <li>Validation</li>
+      <li>Persistence</li>
+      <li>Post-processing, aka callbacks</li>
+      <li>Presentation, rendering a response</li>
+    </ul>
 
-While those steps usually happen in a linear flow, one layer instructing the next, Trailblazer also exposes a _vertical layer_ for *Authentication*. In Trailblazer, authentication of arbitraty steps is something we've thought about before.
+    <p>
+      On the right-hand side, you can see how Trailblazer introduces exciting new abstraction layers. <strong>Layers are implemented as objects.</strong> Each object handles only one specific aspect, minimizing the responsibility per layer.
+    </p>
+  </div>
+</div>
 
-The Trailblazer architecture provides one layer per responsibility. Following that approach will lead to controllers being empty HTTP endpoints, lean models with persistence-relevant scopes, finders and associations, only, and a handful of new, exciting objects helping you to implement the business.
+A vertical *Authentication* layer allows to involve policies at every point in your code.
 
-## Operation / Structure / Hooking to Endpoint
+Following that approach will lead to controllers being empty HTTP endpoints, lean models with persistence-relevant scopes, finders and associations, only, and a handful of new, innovating objects helping you to implement the business.
+
+## Application Features
 
 Every application is a set of functions (or _"features"_) that can be triggered by the user. This could be viewing a comment, updating a user's details, following a draft beer shop, or importing a CSV file of bean grinders into a database.
 
@@ -251,7 +269,9 @@ A concept could be comments, blog posts, image galleries or abstract workflows. 
 
 ## View (UI)
 
-While the operation is the pivotal element for the business processing, Trailblazer also comes with a drop-in replacement for views. Object-oriented [view models](/gems/cells) encapsulate fragments of the web UI and make it easier to deal with complexity.
+While the operation is the pivotal element for the business processing, Trailblazer also comes with a drop-in replacement for views. This is completely optional, and you are free to use your framework's views, such as `ActionView`.
+
+Object-oriented [view models](/gems/cells) encapsulate fragments of the web UI and make it easier to deal with complexity.
 
 Those *cells* are usually rendered from the controller.
 
@@ -280,13 +300,17 @@ end
 
 Helpers as known from Rails do not exist anymore. Instead, instance methods of the cell can be used in the view.
 
-```haml
-%h1 Comment
+    %h1 Comment
 
-.row
-  = body
-.row
-  = author_name
-```
+    .row
+      = body
+    .row
+      = author_name
 
 View models in Trailblazer are provided by the [Cells gem](/gems/cells) which is completely decoupled from Trailblazer. It also works fine in other frameworks like Hanami or Sinatra.
+
+## Policy
+
+## Representer
+
+## Where To Go From Here
