@@ -5,6 +5,9 @@ title: Trailblazer in 20 Minutes
 
 # Trailblazer in 20 minutes
 
+This guide only describes a *Create* operation. The same applies to all kinds of other functions, such as updating or deleting. We only had 20 minutes.
+
+
 Announcing itself as a *High-Level Architecture*, Trailblazer aims to help software teams to implement the actual business logic of their applications.
 
 In Trailblazer, we understand business logic as anything that happens after intercepting the HTTP request, and returning a response document.
@@ -111,7 +114,7 @@ class Create < Trailblazer::Operation
   end
 ```
 
-A contract is simply a [Reform class](/gems/reform). **It allows to specify the fields of the input, and arbitrary validations therefore.**
+A contract is simply a [Reform class](/gems/reform). **It allows to specify the fields of the input, and validations specific to that operation.**
 
 Explicitly declaring incoming fields is very important in Trailblazer. When validating the input, the contract will only respect the defined, or whitelisted, fields and ignore unsolicited data in the input. This is why you don't need solutions like `strong_parameters` anymore.
 
@@ -131,7 +134,9 @@ class Create < Trailblazer::Operation
   end
 ```
 
-It first instantiates the contract, which is really just a Reform object. Then, the incoming data is written to the contract object (this is called `deserialization`) and afterwards, validation of the entire object graph is performed using the Reform API.
+In case of a successful validation, the block passed to `validate` is invoked.
+
+The operation's `validate` first instantiates the contract, which is really just a Reform object. Then, the incoming data is written to the contract object (this is called *deserialization*) and afterwards, validation of the entire object graph is performed using the Reform API.
 
 The whole process of validation happens internally, but can be easily customized. An important fact here is that the contract graph is an intermediate object - **instead of writing input to the model, this all happens on the contract**. The model is not accessed at all for validation.
 
@@ -147,3 +152,141 @@ Validation code sits in the contract, callbacks are defined in operation or call
 
 ## Persistence
 
+After having validated data, to persist it, a model object is needed. In most Rails applications, this will be an `ActiveRecord` model, but many Trailblazer projects use alternative libraries such as [Sequel](http://sequel.jeremyevans.net/) or [ROM](http://rom-rb.org/).
+
+You're free to create or retrieve models yourself. However, the operation offers you a trivial API to create a model when it is needed.
+
+```ruby
+class Create < Trailblazer::Operation
+  model Comment, :create # will assign @model = Comment.new
+```
+
+Having the validated data sitting on the contract object, it is a good idea to push the data to the model and save it. This, again, happens using the contract's API.
+
+```ruby
+class Create < Trailblazer::Operation
+  # ..
+  def process(params)
+    validate(params[:comment]) do
+      contract.save
+    end
+  end
+```
+
+**The model is now populated with the validated data, and saved to the database.** Very simple mechanics happen behind the scene and can easily be changed, if you disagree with Trailblazer's flow.
+
+## Callback
+
+Often after persisting, additional logic needs to be executed. This is known as *post-processing* or *callbacks* in Trailblazer. Instead of polluting the model or controller with this code, callbacks live in the operation.
+
+They are literally called when you need them.
+
+```ruby
+class Create < Trailblazer::Operation
+  # ..
+  def process(params)
+    validate(params[:comment]) do
+      contract.save
+
+      after_save!
+    end
+  end
+
+private
+  def after_save!
+    Comment::Notifier.mail(model)
+  end
+```
+
+Callbacks can be methods on the operation, separate callback objects, using [Trailblazer's callback API](http://trailblazer.to/gems/operation/callback.html), or even advanced transactional gems like the excellent [dry-transaction](https://github.com/dry-rb/dry-transaction).
+
+## Test
+
+Trailblazer and its operation design makes it extremely simple to unit-test your application's behavior. **All business code is tested via operation tests.**
+
+```ruby
+describe Comment::Create do
+  it "persists valid input" do
+    op = Comment::Create.(comment: { body: "TRB rocks!", author_id: 1 })
+
+    op.model.persisted?.must_equal true
+    op.model.body.must_equal "TRB rocks!"
+  end
+end
+```
+
+Operations are also used as factories in Trailblazer applications. This will assure that your test application state is always identical to a realistic production state.
+
+```ruby
+let(:user)    { User::Create.(user: attributes_for(:user)).model }
+let(:comment) { Comment::Create.(comment: { body: "Yo!", author_id: user.id} ) }
+```
+
+Gone are the times of leaky factories. Gems such as [factory_girl](https://github.com/thoughtbot/factory_girl) can be used to provide input hashes, only.
+
+Trailblazer also abandons controller tests, in favor of strict integration tests. This minimizes testing to integration and operation tests.
+
+## File Structure
+
+Files for the additional abstraction layers are no longer organized by technology. Trailblazer introduces the idea of *concepts*, which group files by a set of features.
+
+```
+app
+├── concepts
+│   ├── comment
+│   │   ├── contract
+│   │   │   ├── create.rb
+│   │   │   └── update.rb
+│   │   ├── cell
+│   │   │   └── new.rb
+│   │   ├── operation
+│   │   │   ├── create.rb
+│   │   │   └── update.rb
+│   │   └── view
+│   │       ├── new.haml
+│   │       └── show.haml
+```
+
+A concept could be comments, blog posts, image galleries or abstract workflows. At the same time, operations are not limited to CRUD. They often are named `Job::Apply` or `User::Follow` and help with a domain-oriented software design.
+
+## View (UI)
+
+While the operation is the pivotal element for the business processing, Trailblazer also comes with a drop-in replacement for views. Object-oriented [view models](/gems/cells) encapsulate fragments of the web UI and make it easier to deal with complexity.
+
+Those *cells* are usually rendered from the controller.
+
+```ruby
+class CommentsController < ApplicationController
+  def show
+    comment = Comment::Cell.present(params)
+
+    render Comment::Cell::New, comment, layout: Application::Layout
+  end
+```
+
+View models, or cells, are classes.
+
+```ruby
+module Comment::Cell
+  class New < Trailblazer::Cell
+    property :body
+
+    def author_name
+      model.author.full_name || "Anonymous"
+    end
+  end
+end
+```
+
+Helpers as known from Rails do not exist anymore. Instead, instance methods of the cell can be used in the view.
+
+```haml
+%h1 Comment
+
+.row
+  = body
+.row
+  = author_name
+```
+
+View models in Trailblazer are provided by the [Cells gem](/gems/cells) which is completely decoupled from Trailblazer. It also works fine in other frameworks like Hanami or Sinatra.
