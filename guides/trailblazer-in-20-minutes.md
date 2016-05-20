@@ -5,9 +5,9 @@ title: Trailblazer In 20 Minutes (Maybe Less)
 
 # Trailblazer In 20 Minutes (Maybe Less)
 
-Understanding the essential elements of Trailblazer and its *high-level architecture* doesn't take longer than 20 minutes. Once you leave the "MVC" mindset and allow Trailblazer to show how it restructures where code sits and how components interact, it is just another stack in your repertoire.
+Understanding the essential elements of Trailblazer and its *high-level architecture* doesn't take longer than 20 minutes. Once you leave the "MVC" mindset and allow Trailblazer to show how it restructures applications, defines strong conventions where code should sit, and how objects interact, it is just another stack in your repertoire.
 
-Be aware that this guide describes a *Create* operation, only. The discussed concepts apply to all kinds of other functions, such as updating or deleting.
+Be aware that this guide describes a *Create* operation, only. The discussed concepts apply to all kinds of functions, such as updating or deleting.
 
 We hope you like it!
 
@@ -48,7 +48,7 @@ In a web environment, user actions are processed via requests. Each typical busi
   </div>
 </div>
 
-A vertical *Authentication* layer allows to involve policies at every point in your code.
+A vertical *Authorization* layer allows to involve policies at every point in your code.
 
 Following that approach will lead to controllers being empty HTTP endpoints, lean models with persistence-relevant scopes, finders and associations, only, and a handful of new, innovating objects helping you to implement the business.
 
@@ -78,7 +78,7 @@ class CommentsController < ApplicationController
 
 Trailblazer leverages Ruby's namespacing the way it was intended to be used. This is why the operation's constant name is `Comment::Create`.
 
-Another confusing "dialect" is the way objects are invoked in Trailblazer. `Create.(params)` is also known as the *call style*, as it resolves to `Create.call(params)`.
+Each operation has only one responsibility and exposes only one public method: `call`. Ruby automatically invokes the `call` method when the method name is omitted, giving the handily abbreviated style: `Create.(params)` rather than `Create.call(params)`.
 
 You might have noticed that there's no instantiation of the operation happening. This is done internally. Exposing only one public method is a concept adopted from functional programming: Since there's only one way to invoke an operation, you simply can't confuse method orders or mess with internal state.
 
@@ -156,7 +156,7 @@ In case of a successful validation, the block passed to `validate` is invoked.
 
 The operation's `validate` first instantiates the contract, which is really just a Reform object. Then, the incoming data is written to the contract object (this is called *deserialization*) and afterwards, validation of the entire object graph is performed using the Reform API.
 
-The whole process of validation happens internally, but can be easily customized. An important fact here is that the contract graph is an intermediate object - **instead of writing input to the model, this all happens on the contract**. The model is not accessed at all for validation.
+The whole process of validation happens internally, but can be easily customized. An important fact here is that the contract is an intermediate object - **instead of writing input to the model, this all happens on the contract**. The model is not accessed at all for validation.
 
 Having a dedicated contract object sitting between operation and model is why your model classes will end up as a pure persistence layer.
 
@@ -212,7 +212,7 @@ class Create < Trailblazer::Operation
 
 private
   def after_save!
-    Comment::Notifier.mail(model)
+    CommentNotifier.daily_digest(model).deliver_later
   end
 ```
 
@@ -271,14 +271,14 @@ A concept could be comments, blog posts, image galleries or abstract workflows. 
 
 While the operation is the pivotal element for the business processing, Trailblazer also comes with a drop-in replacement for views. This is completely optional, and you are free to use your framework's views, such as `ActionView`.
 
-Object-oriented [view models](/gems/cells) encapsulate fragments of the web UI and make it easier to deal with complexity.
+Object-oriented view models are provided by the [Cells gem](/gems/cells). They encapsulate fragments of the web UI and make it easier to deal with complexity.
 
 Those *cells* are usually rendered from the controller.
 
 ```ruby
 class CommentsController < ApplicationController
   def show
-    comment = Comment::Cell.present(params)
+    comment = Comment::Create.present(params)
 
     render Comment::Cell::New, comment, layout: Application::Layout
   end
