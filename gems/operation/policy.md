@@ -34,11 +34,11 @@ This class would probably be best located at `app/concepts/thing/policy.rb`.
 
 ## Operation Policy
 
-Use `::policy` to hook the policy class along with a query action into your operation.
+Use `Trailblazer::Operation::Policy` to hook the policy class along with a query action into your operation.
 
 
     class Thing::Create < Trailblazer::Operation
-      include Policy
+      include Trailblazer::Operation::Policy
 
       policy Thing::Policy, :create?
 
@@ -73,7 +73,8 @@ Pundit policy classes can be used directly in operations.
 
 
     class Thing::Create < Trailblazer::Operation
-      include Policy
+      include Trailblazer::Operation::Policy
+
       policy ThingPolicy, :create?
 
 
