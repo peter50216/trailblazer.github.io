@@ -34,7 +34,7 @@ This class would probably be best located at `app/concepts/thing/policy.rb`.
 
 ## Operation Policy
 
-Use `Trailblazer::Operation::Policy` to hook the policy class along with a query action into your operation.
+Use `::policy` to hook the policy class along with a query action into your operation.
 
 
     class Thing::Create < Trailblazer::Operation
