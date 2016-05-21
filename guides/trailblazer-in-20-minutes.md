@@ -1,5 +1,5 @@
 ---
-layout: operation
+layout: guide
 title: Trailblazer In 20 Minutes (Maybe Less)
 ---
 
@@ -191,7 +191,7 @@ class Create < Trailblazer::Operation
   end
 ```
 
-**The model is now populated with the validated data, and saved to the database.** Very simple mechanics happen behind the scene and can easily be changed, if you disagree with Trailblazer's flow.
+**The model is now populated with the validated data, and saved to the database.** Very simple mechanics happen behind the scenes and can easily be changed, if you disagree with Trailblazer's flow.
 
 ## Callback
 

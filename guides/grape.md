@@ -1,5 +1,5 @@
 ---
-layout: operation
+layout: guide
 title: "Grape and Trailblazer"
 ---
 

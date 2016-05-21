@@ -1,5 +1,5 @@
 ---
-layout: operation
+layout: guide
 title: "Getting Started with Sinatra and Trailblazer"
 ---
 
