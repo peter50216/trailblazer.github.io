@@ -1,9 +1,9 @@
 ---
 layout: guide
-title: Trailblazer In 20 Minutes (Maybe Less)
+title: Trailblazer In 20 Minutes (Actually, Even Less)
 ---
 
-# Trailblazer In 20 Minutes (Maybe Less)
+# Trailblazer In 20 Minutes (Actually, Even Less)
 
 Understanding the essential elements of Trailblazer and its *high-level architecture* doesn't take longer than 20 minutes. Once you leave the "MVC" mindset and allow Trailblazer to show how it restructures applications, defines strong conventions where code should sit, and how objects interact, it is just another stack in your repertoire.
 
@@ -195,7 +195,7 @@ class Create < Trailblazer::Operation
 
 ## Callback
 
-Often after persisting, additional logic needs to be executed. This is known as *post-processing* or *callbacks* in Trailblazer. Instead of polluting the model or controller with this code, callbacks live in the operation.
+Often after persisting, additional logic needs to be executed. This is known as *post-processing* or *callbacks* in Trailblazer. Instead of polluting the model or controller with this code, **callbacks live in the operation**.
 
 They are literally called when you need them.
 
@@ -271,7 +271,7 @@ A concept could be comments, blog posts, image galleries or abstract workflows. 
 
 While the operation is the pivotal element for the business processing, Trailblazer also comes with a drop-in replacement for views. This is completely optional, and you are free to use your framework's views, such as `ActionView`.
 
-Object-oriented view models are provided by the [Cells gem](/gems/cells). They encapsulate fragments of the web UI and make it easier to deal with complexity.
+Object-oriented *view models* are provided by the [Cells gem](/gems/cells). They encapsulate fragments of the web UI and make it easier to deal with complexity.
 
 Those *cells* are usually rendered from the controller.
 
@@ -307,10 +307,86 @@ Helpers as known from Rails do not exist anymore. Instead, instance methods of t
     .row
       = author_name
 
-View models in Trailblazer are provided by the [Cells gem](/gems/cells) which is completely decoupled from Trailblazer. It also works fine in other frameworks like Hanami or Sinatra.
+Again, view models in Trailblazer are provided by the [Cells gem](/gems/cells) which is completely decoupled from Trailblazer. It also works fine in other frameworks like Hanami or Sinatra.
 
 ## Policy
 
+Trailblazer makes authorization a first-class citizen. Operations define policy objects that can be accessed and queried throughout the stack for deciding about access control.
+
+The simplest form is a *guard* policy you can embedd straight into the operation.
+
+```ruby
+class Create < Trailblazer::Operation
+  policy do |params|
+    params[:current_user].present?
+  end
+```
+
+Policies will be evaluated when the operation is instantiated and **allow denying the execution of code for specific environments**, plus they can be reused at any later point. This includes queries in the view layer.
+
+Also, they are not limited to blocks. Trailblazer allows [Pundit-style policies](http://trailblazer.to/), too.
+
 ## Representer
 
-## Where To Go From Here
+While operations are extremely helpful for processing form submissions, they can also be used in the exact same way for document APIs, e.g. with JSON or XML. This works by **using *representers* to parse input and render the response document**.
+
+Representers can be defined inline in the operation.
+
+```ruby
+class Create < Trailblazer::Operation
+  representer do
+    include Roar::JSON
+    include Roar::Hypermedia
+
+    property :id
+    property :body
+    property :author_id
+
+    link(:self) { comment_path(represented.id) }
+  end
+```
+
+The operation is now aware the input and output document is not a hash anymore but a JSON document. It will use the representer to parse the incoming document, and provide a `to_json` method for the controller to render the response.
+
+```ruby
+Comment::Create.('{"body": "Solnic rules!"}').to_json
+#=> '{"body": "Solnic rules!", "id":1, link: {"rel":"self", "href":"/comments/1"}}'
+```
+
+Representers in Trailblazer are provided by the [Roar gem](/gems/roar) and are completely optional.
+
+## What We Didn't Talk About
+
+Trailblazer has many more features that will help writing better software.
+
+If you don't like contracts, policies or representers inline, you can instruct the operation to use an external class, too. The composable interface allows that.
+
+You may also leverage operations in render-only requests and use the contract object with your form rendering helper.
+
+Trailblazer's polymorphic interface allows to handle edge cases cleanly in small subclasses without the need for `if`s and `else` throughout your code base.
+
+And, there's more optimizations coming every day. We love working on Trailblazer and making life for programmers simpler.
+
+<div class="row guide">
+  <div class="column medium-4">
+    <div class="content">
+      <p>
+        <a href="/newsletter">→ Join our Trailblazer newsletter</a> and stay up-to-date what's new in the community and the gems.
+      </p>
+
+      <p>Our <a href="http://gitter.im/trailblazer/chat">Gitter chat channel</a> is the perfect source for instant help!</p>
+    </div>
+  </div>
+
+  <div class="column medium-8">
+    <a href="http://leanpub.com/trailblazer">
+      <img src="/images/3dbuch-freigestellt.png" id="book-teaser">
+    </a>
+
+    <p>
+      Check out the sample application's <a href="http://github.com/apotonick/gemgem-trbrb">repository</a> for some teaser code or <a href="http://leanpub.com/trailblazer">→ buy the book</a> and learn everything about Trailblazer.
+    </p>
+
+    <p>Or browse our <a href="/gems/operation">extensive documentation</a> online!</p>
+  </div>
+</div>
