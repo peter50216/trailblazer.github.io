@@ -97,8 +97,8 @@ description: "Many companies use the Trailblazer architecture in their software.
 
   <div class="row">
     <div class="column medium-2 text-center logo-leveler">
-      <a href="http://localsearch.com.au/">
-        <img src="" />
+      <a href="https://www.skovingulv.no">
+        <img src="/images/users/skovin.png" />
       </a>
     </div>
 

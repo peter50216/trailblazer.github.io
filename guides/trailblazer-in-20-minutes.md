@@ -1,6 +1,8 @@
 ---
 layout: guide
 title: Trailblazer In 20 Minutes (Actually, Even Less)
+description: "Understanding the essential elements of Trailblazer and its high-level architecture doesn't take longer than 20 minutes. Let Trailblazer show you how its stack extensions to the conventional MVC make you write better structured software."
+imageurl: http://trailblazer.to/images/diagrams/high-level.jpg
 ---
 
 # Trailblazer In 20 Minutes (Actually, Even Less)
