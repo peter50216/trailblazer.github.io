@@ -15,7 +15,8 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
         {% include about.html %}
     </div>
   </div>
-</section>
+
+
 
 <!--
 <div class="row">
