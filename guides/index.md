@@ -94,7 +94,7 @@ title: Guides
       <p>The example app shows Grape with Trailblazer and Roar's representers for deserialization and rendering.</p>
 
       <p>
-         <a href="/guides/index.html">→ Learn more!</a>
+         <a href="/guides/grape.html">→ Learn more!</a>
       </p>
     </div>
   </div>
