@@ -149,4 +149,30 @@ You can set your own representer class if you don't want it to be inferred.
 
 ## Responder
 
-The `Operation::Responder` module uses `Representer` and allows using an operation instance directly with Rails responders.
+The `Operation::Responder` module adds methods to use an operation instance directly with Rails responders. This is why this module comes from the `traiblazer-rails` gem.
+
+```ruby
+class Create < Trailblazer::Operation
+  include Responder
+  include Representer
+
+  representer ..
+end
+```
+
+The operation can now be passed to `respond_to`.
+
+```ruby
+def create
+  op = Comment::Create.(params)
+  respond_to op
+end
+```
+
+This is done automatically when using `Trailblazer::Controller#respond`.
+
+```ruby
+def create
+  respond Comment::Create
+end
+```
