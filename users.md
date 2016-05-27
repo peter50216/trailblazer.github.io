@@ -102,9 +102,9 @@ description: "Many companies use the Trailblazer architecture in their software.
       </a>
     </div>
 
-    <div class="column medium-2 text-center">
-      <a href="http://microminimus.com">
-        <img src="" />
+    <div class="column medium-2 text-center logo-leveler">
+      <a href="http://angelcompass.org/">
+        <img src="/images/users/angelcompass.png" />
       </a>
     </div>
 
