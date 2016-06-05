@@ -110,7 +110,7 @@ Note that no `@form` is instantiated and assigned to the controller. If you need
 
 ## Form
 
-To render the operation's form, use `#form`. This is identical to `#present` with two additional steps.
+To render the operation's form, use `#form`. This is identical to `#present` plus the contract is being instantiated.
 
     class CommentsController < ApplicationController
       def new
@@ -119,6 +119,8 @@ To render the operation's form, use `#form`. This is identical to `#present` wit
     end
 
 This _instantiates_ the operation with `params` and then sets `@operation`, `@model` and `@form` on the controller instance. After that, the form's `prepopulate!` method is called and the form is ready for rendering.
+
+The `#form` helper **does not run** `#process`.
 
 It returns the _form_ instance.
 
