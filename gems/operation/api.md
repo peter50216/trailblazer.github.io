@@ -117,7 +117,7 @@ The `validate` method will instantiate the operation's Reform form with the mode
       def process(params)
         manual_model = Comment.find(1)
 
-        validate(params, manual_model) do
+        validate(params[:comment], manual_model) do
           contract.save
         end
       end
@@ -138,7 +138,7 @@ However, since most operations use `Model`, we can omit a lot of code here.
       end
 
       def process(params)
-        validate(params) do
+        validate(params[:comment]) do
           contract.save
         end
       end
