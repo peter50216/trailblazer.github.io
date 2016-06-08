@@ -107,7 +107,7 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
     end
 
     def process(params)
-      if validate(params)
+      if validate(params[:comment])
 
       else
 
