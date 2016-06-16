@@ -30,5 +30,38 @@
 /* TODO: move to pro.scss */
 .pro-box {
   border: solid 1px #cccccc;
-  margin-bottom: 27px;
+  margin-top: 27px;
+
+  button {
+    background-color: #525252;
+  }
+
+  .price-figure {
+    margin-bottom: 12px;
+  }
+
+  .price-dollar {
+
+    i {
+      font-size: 40px;
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: -2px;
+      line-height: 20px;
+    }
+
+    small {
+      letter-spacing: -6px;
+      line-height: 30px;
+      font-size: 21px;
+      top: -20px;
+      font-weight: 500;
+    }
+
+  }
+}
+.pro-header {
+  margin-bottom: 0.5em;
+  font-size: 2.3125rem;
+  font-weight: normal;
 }

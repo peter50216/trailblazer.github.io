@@ -6,7 +6,11 @@ title: Pro Plan
 <div class="row">
   <div class="medium-centered medium-6 columns">
     <img src="/images/pro.png">
+  </div>
+</div>
 
+<div class="row">
+  <div class="medium-6 columns">
     <p>
       Trailblazer Pro is a monthly subscription plan.
     </p>
@@ -22,7 +26,7 @@ title: Pro Plan
       </li>
       <li><i class="fa-li fa fa-check-square"></i>
         <strong>Private slack channel</strong>
-        For quick questions or support sessions, you can use our chat - we will help within 4 hours.
+        For quick questions or support sessions, you can use our chat - we will help within 6 hours.
       </li>
       <li><i class="fa-li fa fa-check-square"></i>
         <strong>Premium docs</strong>
@@ -33,21 +37,50 @@ title: Pro Plan
     <p>
       * You can purchase more tickets via our credit system.
     </p>
+  </div>
+
+  <div class="medium-6 columns">
 
     <div class="text-center pro-box">
-      <h2>Freelancer</h2>
+      <div class="pro-header">
+        <i class="fa fa-coffee"></i>
+        Freelancer
+      </div>
 
-      <p>The plan for independent developers and freelancers.</p>
+      <div class="price-figure">
+        <span class="price-dollar">
+          <small>$</small>
+          <i>12</i>
+        </span>
 
-      <p>$12/month</p>
+        <span>/month</span>
+      </div>
+
+
+      <p>For one developer.</p>
+
+      <button>SUBSCRIBE</button>
+
     </div>
 
     <div class="text-center pro-box">
-      <h2>Company</h2>
+      <div class="pro-header">
+        <i class="fa fa-group"></i>
+        Company
+      </div>
+
+      <div class="price-figure">
+        <span class="price-dollar">
+          <small>$</small>
+          <i>29</i>
+        </span>
+
+        <span>/month</span>
+      </div>
 
       <p>For teams up to 10 developers.</p>
 
-      <p>$29/month</p>
+      <button>SUBSCRIBE</button>
     </div>
   </div>
 </div>
@@ -55,7 +88,12 @@ title: Pro Plan
 <div class="row">
   <div class="medium-centered medium-6 columns">
     <img src="/images/credit.png">
+  </div>
+</div>
 
+
+<div class="row">
+  <div class="medium-6 columns">
     <p>
       Trailblazer Credit allows you to purchase credits and trade them in for support or premium documentation whenever you need it.
     </p>
@@ -66,6 +104,10 @@ title: Pro Plan
       Trailblazer Credit will be launched in August 2016.
     </p>
   </div>
+
+  <div class="medium-6 columns">
+  </div>
+
 </div>
 
 
