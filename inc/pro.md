@@ -3,6 +3,31 @@ layout: guide
 title: Pro Plan
 ---
 
+<!--
+<div class="row">
+  <div class="columns">
+    <h2>Why Pay For Trailblazer?</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="columns">
+
+    We offer paid support for Trailblazer projects. Here's why you should consider it.
+
+    <ul>
+      <li>Stuck with that annoying special use case? Get help from the core team members.</li>
+      <li>Don't reinvent the wheel! Find a Trailblazer recipe that cut down your development time.</li>
+      <li>Need help quick? Get a response the same day!</li>
+      <li>Suggest and discuss new functionality directly with the core team.</li>
+      <li>Help improve Trailblazer! Fund development of new features.</li>
+      <li>Support the team behind Trailblazer.</li>
+    </ul>
+
+  </div>
+</div>
+-->
+
 <div class="row">
   <div class="medium-centered medium-6 columns">
     <img src="/images/pro.png">
@@ -40,7 +65,6 @@ title: Pro Plan
   </div>
 
   <div class="medium-6 columns">
-
     <div class="text-center pro-box">
       <div class="pro-header">
         <i class="fa fa-coffee"></i>
@@ -66,7 +90,7 @@ title: Pro Plan
     <div class="text-center pro-box">
       <div class="pro-header">
         <i class="fa fa-group"></i>
-        Company
+        Team
       </div>
 
       <div class="price-figure">
@@ -78,10 +102,16 @@ title: Pro Plan
         <span>/month</span>
       </div>
 
-      <p>For teams up to 10 developers.</p>
+      <p>For company teams.</p>
 
       <button>SUBSCRIBE</button>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="columns spacer">
+
   </div>
 </div>
 
@@ -90,7 +120,6 @@ title: Pro Plan
     <img src="/images/credit.png">
   </div>
 </div>
-
 
 <div class="row">
   <div class="medium-6 columns">
@@ -101,7 +130,7 @@ title: Pro Plan
     <p>No subscription is necessary for this - you decide when you need us!</p>
 
     <p>
-      Trailblazer Credit will be launched in August 2016.
+      <strong>Trailblazer Credit will be launched in August 2016.</strong>
     </p>
   </div>
 
@@ -110,5 +139,3 @@ title: Pro Plan
 
 </div>
 
-
-Why Should I Pay For Trailblazer?
