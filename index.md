@@ -24,7 +24,30 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
 <section class="sub-section about">
   <div class="row">
     <div class="columns">
-        {% include about.html %}
+      <h2>About Trailblazer</h2>
+
+      <div class="row">
+        <div class="columns medium-6">
+          <p>Trailblazer gives you a high-level architecture for web applications.</p>
+          <p>
+            Logic that used to get violently pressed into MVC is restructured and decoupled from the Rails framework. New abstraction layers like operations, form objects, authorization policies, data twins and view models guide you towards a better architecture.
+          </p>
+          <p>
+            By applying encapsulation and good OOP, Trailblazer maximizes reusability of components, gives you a more intuitive structure for growing applications and adds conventions and best practices on top of Rails' primitive MVC stack.
+          </p>
+          <p>
+            A polymorphic architecture sitting between controller and persistence is designed to handle many different contexts and helps to minimize code to handle various user roles and edge cases.
+          </p>
+
+          <p>Check out who's using <a href="/users.html">Trailblazer in production →</a></p>
+
+           <a href="/guides/trailblazer-in-20-minutes.html" class="button radius">Get Started:<br>
+            Trailblazer In 20 Minutes (Actually Even Less)</a>
+        </div>
+        <div class="columns medium-6">
+          <img src="images/Trb-Stack.png">
+        </div>
+      </div>
     </div>
   </div>
 
