@@ -48,9 +48,13 @@ This results in classes such as follows.
 
 
 ```ruby
-class Comment::Cell::New < Trailblazer::Cell
-  def show
-    render # renders app/concepts/comment/view/new.haml.
+module Comment # or: Comment < ActiveRecord::Base or alike.
+  module Cell
+    class New < Trailblazer::Cell
+      def show
+        render # renders app/concepts/comment/view/new.haml.
+      end
+    end
   end
 end
 ```
@@ -62,7 +66,7 @@ This is different to old suffix-cells. While the `show` method still is the publ
 Note that you don't have to provide a `show` method, it is created automatically.
 
 ```ruby
-class Comment::Cell::New < Trailblazer::Cell
+class New < Trailblazer::Cell
 end
 ```
 
@@ -82,8 +86,14 @@ Note that the entire path after `Cell::` is considered, resulting in a hierarchi
 Use `ViewName::Flat` if you prefer a flat view name.
 
 ```ruby
-class Comment::Cell::Themed::New < Trailblazer::Cell
-  extend ViewName::Flat
+module Comment # or: Comment < ActiveRecord::Base or alike.
+  module Cell
+    module Themed
+      class New < Trailblazer::Cell
+        extend ViewName::Flat
+      end
+    end
+  end
 end
 
 Comment::Cell::Themed::New #=> "new.haml"
