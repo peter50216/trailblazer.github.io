@@ -509,9 +509,19 @@ You can also have dynamic option computation at compile-time.
     class SongRepresenter < Representable::Decorator
       include Representable::JSON
 
-      defaults do |name|
+      defaults do |name, options|
         { as: name.camelize }
       end
+
+The `options` hash combines the user's and Representable computed options.
+
+    property :id, skip: true
+
+    defaults do |name, options|
+      options[:skip] ? { as: name.camelize } : {}
+    end
+
+Note that the dynamic `defaults` block always has to return a hash.
 
 Combining those two forms also works.
 
