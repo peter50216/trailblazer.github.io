@@ -17,6 +17,46 @@ Every Reform form object inherits from `Disposable::Twin`, making every form a t
 
 If you're looking for a specific feature, make sure to check the [Disposable documentation](/gems/disposable/api.html)
 
+## Coercion
+
+Incoming form data often needs conversion to a specific type, like timestamps. Reform uses [dry-types](http://dry-rb.org/gems/dry-types/) for coercion. The DSL is seamlessly integrated with the `:type` option.
+
+Be sure to add `dry-types` to your `Gemfile` when requiring coercion.
+
+    gem "dry-types"
+
+To use coercion, you need to include the `Coercion` module into your form class.
+
+    require "reform/form/coercion"
+
+    class SongForm < Reform::Form
+      feature Coercion
+
+      property :written_at, type: Types::Form::DateTime
+    end
+
+    form.validate("written_at" => "26 September")
+
+Coercion only happens in `#validate`, *not* during construction.
+
+    form.written_at #=> <DateTime "2014 September 26 00:00">
+
+Available coercion types are [documented here](http://dry-rb.org/gems/dry-types/built-in-types/).
+
+## Manual Coercion
+
+To filter values manually, you can override the setter in the form.
+
+    class SongForm < Reform::Form
+      property :title
+
+      def title=(value)
+        super sanitize(value) # value is raw form input.
+      end
+    end
+
+Again, setters are only called in `validate`, *not* during construction.
+
 
 ## Inheritance
 

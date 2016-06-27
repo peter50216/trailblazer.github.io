@@ -620,13 +620,17 @@ In order to grab the collection for rendering or parsing, Representable will now
 
 Instead of explicitly defining representers for collections using a ["lonely collection"](#standalone-collection), you can let Representable  do that for you.
 
+You define a singular representer, Representable will infer the collection representer.
+
 Rendering a collection of objects comes for free, using `for_collection`.
 
     songs = Song.all
-    SongRepresenter.new(songs).for_collection.to_json
+    SongRepresenter.for_collection.new(songs).to_json
     #=> '[{"title": "Sevens"}, {"title": "Eric"}]'
 
-For parsing, you need to provide the class for the nested items. This happens via `collection_representer
+`SongRepresenter.for_collection` will return a collection representer class.
+
+For parsing, you need to provide the class for the nested items. This happens via `collection_representer` in the representer class.
 
 ```ruby
 class SongsRepresenter < Representable::Decorator
@@ -639,10 +643,9 @@ end
 
 You can now parse collections to `Song` instances.
 
-    songs = Song.all
     json  = '[{"title": "Sevens"}, {"title": "Eric"}]'
 
-    SongRepresenter.new(songs).for_collection).from_json(json)
+    SongRepresenter.for_collection.new([]).from_json(json)
 
 Note: the implicit collection representer internally is implemented using a lonely collection. Everything you pass to `::collection_representer` is simply provided to the `::items` call in the lonely collection. That allows you to use `:populator` and all the other goodies, too.
 

@@ -371,41 +371,6 @@ Here's what the block parameters look like.
     end
 
 
-
-## Coercion
-
-Often you want incoming form data to be converted to a type, like timestamps. Reform uses [virtus](https://github.com/solnic/virtus) for coercion, the DSL is seamlessly integrated into Reform with the `:type` option.
-
-### Virtus Coercion
-
-Be sure to add `virtus` to your Gemfile.
-
-    require 'reform/form/coercion'
-
-    class SongForm < Reform::Form
-      include Coercion
-
-      property :written_at, type: DateTime
-    end
-
-    form.validate("written_at" => "26 September")
-
-Coercion only happens in `#validate`.
-
-    form.written_at #=> <DateTime "2014 September 26 00:00">
-
-### Manual Coercing Values
-
-If you need to filter values manually, you can override the setter in the form.
-
-    class SongForm < Reform::Form
-      property :title
-
-      def title=(value)
-        super sanitize(value) # value is raw form input.
-      end
-    end
-
 As with the built-in coercion, this setter is only called in `#validate`.
 
 
