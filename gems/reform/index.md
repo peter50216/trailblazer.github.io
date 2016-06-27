@@ -215,38 +215,40 @@ The manual saving with block is not encouraged. You should rather check the Disp
 
 Very often, you need to give Reform some information how to create or find nested objects when `validate`ing. This directive is called _populator_ and [documented here](http://trailblazer.to/gems/reform/populator.html).
 
-## Installation
+## Installation: Dry-Validation
 
-Add this line to your Gemfile:
+Add this your Gemfile.
 
-    gem 'reform'
+    gem "reform"
 
-Reform works fine with Rails 3.1-4.2. However, inheritance of validations with `ActiveModel::Validations` is broken in Rails 3.2 and 4.0.
-
-Since Reform 2.0 you need to specify which **validation backend** you want to use (unless you're in a Rails environment where ActiveModel will be used).
-
-To use ActiveModel (not recommended as it doesn't support removing validations).
-
-    require "reform/form/active_model/validations"
-    Reform::Form.class_eval do
-      include Reform::Form::ActiveModel::Validations
-    end
-
-To use dry-validation (recommended).
+Please use [dry-validation](http://dry-rb.org/gems/dry-validation), which is our recommended validation engine. Put the following snippet into an initializer.
 
     require "reform/form/dry"
+
     Reform::Form.class_eval do
       include Reform::Form::Dry
     end
 
-Put this in an initializer or on top of your script.
+## Installation: ActiveModel
 
-## Rails Support
-
-Use [Reform-rails](https://github.com/trailblazer/reform-rails) to automatically load and include Reform features for a standard Rails stack, e.g. `ActiveModel::Validations`.
+Add this to your Gemfile.
 
     gem "reform"
     gem "reform-rails"
+
+To use `ActiveModel` (not recommended as it is way behind).
+
+    require "reform/form/active_model/validations"
+
+    Reform::Form.class_eval do
+      include Reform::Form::ActiveModel::Validations
+    end
+
+Things you should know when using ActiveModel with Reform.
+
+* `ActiveModel` support is provided by the `reform-rails` gem. You have to add it to your `Gemfile`.
+* The above last step of including `ActiveModel::Validations` is done automatically in a Rails environment.
+* Reform works fine with Rails 3.1-4.2. However, inheritance of validations with `ActiveModel::Validations` is broken in Rails 3.2 and 4.0.
 
 ## Composition
 
