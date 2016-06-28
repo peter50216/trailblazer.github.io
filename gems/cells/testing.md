@@ -105,7 +105,7 @@ You can disable Capybara for Cells even when the gem is loaded.
 
     Cell::Testing.capybara = false
 
-## Capybara with Minitest
+## Capybara with Minitest (Rails)
 
 With Minitest, the recommended approach is to use the `minitest-rails-capybara` gem.
 
@@ -129,3 +129,30 @@ NoMethodError: undefined method `must_have_css' for #<User::Cell::Index:0xb5a6c>
 ```
 
 Here's an example [how we do it](https://github.com/apotonick/gemgem-trbrb/blob/7cc8c7a0de78ba00092957a32d8cd234f102c73f/test/test_helper.rb#L19) in Gemgem.
+
+## Capybara with Minitest::Spec
+
+In a non-Rails environment, the [capybara_minitest_spec](https://github.com/ordinaryzelig/capybara_minitest_spec) gem is what we use.
+
+    group :test do
+      gem "capybara_minitest_spec"
+    end
+
+Add the following to your `test_helper.rb`.
+
+    require "capybara_minitest_spec"
+    Cell::Testing.capybara = true
+
+After including the `Testing` module, you're ready to run specs against cells.
+
+```ruby
+class NavigationCellTest < Minitest::Spec
+  include Cell::Testing
+
+  it "renders avatar when user provided" do
+    html = cell(Pro::Cell::Navigation, user).()
+
+    html.must_have_css "#avatar-signed-in"
+    html.to_s.must_match "Signed in: nick@trb.to"
+  end
+```
