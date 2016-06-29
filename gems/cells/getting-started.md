@@ -1,6 +1,7 @@
 ---
 title: "Cells: Getting Started"
 layout: cells
+description: "Learn how Trailblazer::Cell helps you refactoring legacy views. 4-minutes read."
 ---
 
 # Cells: Getting Started
@@ -13,7 +14,7 @@ This guide discusses how to get started with `Trailblazer::Cell`, the canonical 
 
 ## Refactoring Legacy Views
 
-When refactoring legacy views into a solid cell architecture, it is often advisable to start with small fragments and extract markup and logic into an object-oriented cell. Afte that is done, you can move up and replace a bigger fragment of the view, and so on.
+When refactoring legacy views into a solid cell architecture, it is often advisable to start with small fragments and extract markup and logic into an object-oriented cell. After that is done, you can move up and replace a bigger fragment of the view, and so on.
 
 Given you were running an arbitrary Ruby web application, let's assume you had a menu bar sitting in your global layout. The menu shows navigation links to pages and - dependent on the login status of the current user - either a miniatur avatar of the latter or a link to sign in.
 
@@ -56,7 +57,7 @@ Cut the `%nav` fragment from the original `layout.html.haml` and replace it with
       %body
         = Pro::Cell::Navigation.(nil, current_user: current_user).()
 
-Instead of keeping navigation view code in the layout, or rendering a partial, the `Pro::Cell::Naviation` cell is now responsible to provide the HTML fragment representing the menu bar.
+Instead of keeping navigation view code in the layout, or rendering a partial, the `Pro::Cell::Navigation` cell is now responsible to provide the HTML fragment representing the menu bar.
 
 The cell is invoked without a _model_, but we pass in the `current_user` as an _option_. This code assumes that the `current_user` object is available in the layout view. As the current user is passed from your web framework to the cell, this is called an _dependency injection_.
 
