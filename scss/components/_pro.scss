@@ -1,0 +1,51 @@
+.pro-box.top-space { margin-top: 27px; }
+.pro-box {
+  border: solid 1px #cccccc;
+
+
+  button {
+    background-color: #525252;
+  }
+
+  .price-figure {
+    margin-bottom: 12px;
+  }
+
+  .price-dollar {
+
+    i {
+      font-size: 40px;
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: -2px;
+      line-height: 20px;
+    }
+
+    small {
+      letter-spacing: -6px;
+      line-height: 30px;
+      font-size: 21px;
+      top: -20px;
+      font-weight: 500;
+    }
+
+  }
+}
+.pro-header {
+  margin-bottom: 0.5em;
+  font-size: 2.3125rem;
+  font-weight: normal;
+}
+
+.spacer {
+  height: 36px;
+  width: 100%;
+}
+
+.pro-box.features p {
+  padding: 0px 18px 0px 18px;
+}
+
+pro-box.features p:first-child {
+  padding-top: 18px;
+}

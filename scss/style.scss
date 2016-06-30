@@ -8,11 +8,24 @@
 /* padding and margins */
 @import "padding-margin";
 
-/* custom */
-@import "custom";
+// UI Components
+@import "components/testimonials";
+@import "components/gems";
+@import "components/navigation";
+@import "components/avatar";
+@import "components/code_boxes";
+@import "components/guides";
+@import "components/pro";
+
+//Layout
+@import "layout/footer";
+@import "layout/hero";
+@import "layout/top-footer";
+@import "layout/sections";
+@import "layout/code-content";
 
 @import "dark";
 
-@import "slick", "slick-theme";
+@import "slick", "slick-theme"; // from bower_components.
 
 /* this file gets compiled by grunt into an application-wide /css/style.css file! */
