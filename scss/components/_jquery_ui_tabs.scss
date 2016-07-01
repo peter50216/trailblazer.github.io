@@ -1,0 +1,38 @@
+.tabs {
+
+    padding: 0px;
+    background: none;
+    border-width: 0px;
+    margin-bottom: 1.25rem !important;
+
+   .ui-tabs-nav {
+      padding-left: 0px;
+      background: transparent;
+      border-width: 0px 0px 1px 0px;
+      -moz-border-radius: 0px;
+      -webkit-border-radius: 0px;
+      border-radius: 0px;
+  }
+
+  .ui-state-active {
+    background: #fff !important;
+    border-color: #ddd !important;
+
+  }
+  .ui-state-active a {
+    color: #000 !important;
+  }
+
+
+  /*#.ui-tabs-nav li {
+    background: #e6e6e6;
+  }*/
+
+   .ui-tabs-panel {
+    border-width: 0px 1px 1px 1px;
+  }
+  .ui-tabs .ui-tabs-nav li a {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 1rem;
+  }
+}
