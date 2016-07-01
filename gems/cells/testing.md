@@ -65,7 +65,15 @@ This will provide a testable controller via `#controller`, which is automaticall
 
 ## Rspec
 
-Rspec works out of the box. You can use the `#cell` and `#concept` builders in your specs.
+Rspec works with the [`rspec-cells` gem](https://github.com/apotonick/rspec-cells).
+
+Make sure to install it.
+
+```ruby
+gem "rspec-cells"
+```
+
+You can use the `#cell` and `#concept` builders in your specs.
 
 
     describe SongCell, type: :cell do

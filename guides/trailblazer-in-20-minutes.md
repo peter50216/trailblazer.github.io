@@ -326,7 +326,7 @@ class Create < Trailblazer::Operation
 
 Policies will be evaluated when the operation is instantiated and **allow denying the execution of code for specific environments**, plus they can be reused at any later point. This includes queries in the view layer.
 
-Also, they are not limited to blocks. Trailblazer allows [Pundit-style policies](http://trailblazer.to/), too.
+Also, they are not limited to blocks. Trailblazer allows [Pundit-style policies](http://trailblazer.to/gems/operation/policy.html#pundit), too.
 
 ## Representer
 

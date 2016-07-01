@@ -38,9 +38,10 @@ Here's what the old legacy `layout.html.haml` looks like.
 
 Of course, this navigation bar doesn't really make sense without any links added. I've left that out so we can focus on the structure. We will discuss how helpers work in the per-framework sections below.
 
-In order to convert everything below the `<nav>` node into a cell, we first need to add this gem to our `Gemfile`.
-
 ## Extraction
+
+In order to convert all markup below the `<nav>` node into a cell, we first need to add this gem to our `Gemfile`.
+
 
 For now, all you need is the `trailblazer-cells` gem and the Cells template engine.
 
@@ -51,11 +52,55 @@ Please note that `trailblazer-cells` simply loads the `cells` gem and then adds 
 
 Cut the `%nav` fragment from the original `layout.html.haml` and replace it with the cell invocation.
 
-    %html
-      %head
+<div class="tabs">
+  <ul>
+    <li><a href="#invoc-rb">Ruby</a></li>
+    <li><a href="#invoc-ra">Rails</a></li>
+    <li><a href="#invoc-sn">Sinatra</a></li>
+    <li><a href="#invoc-hn">Hanami</a></li>
+  </ul>
 
-      %body
-        = Pro::Cell::Navigation.(nil, current_user: current_user).()
+  <div id="invoc-rb">
+{% highlight haml %}
+%html
+  %head
+
+  %body
+    = Pro::Cell::Navigation.(nil, current_user: current_user).()
+{% endhighlight %}
+
+    <p>
+      Cells can be invoked using the call style.
+    </p>
+  </div>
+
+  <div id="invoc-ra">
+
+{% highlight ruby %}
+%html
+  %head
+
+  %body
+    = cell(Pro::Cell::Navigation, nil, current_user: current_user)
+{% endhighlight %}
+
+    <p>
+      In Rails, you can use the handy <code>cell</code> helper to invoke the view model.
+    </p>
+  </div>
+
+  <div id="invoc-sn">
+
+  </div>
+</div>
+
+<script type="text/javascript">
+$( ".tabs" ).tabs({
+  active: 1
+});
+$(".tabs").removeClass("ui-widget");
+
+</script>
 
 Instead of keeping navigation view code in the layout, or rendering a partial, the `Pro::Cell::Navigation` cell is now responsible to provide the HTML fragment representing the menu bar.
 

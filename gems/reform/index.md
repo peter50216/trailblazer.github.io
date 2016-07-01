@@ -457,11 +457,43 @@ The same applies to saving: Reform will call `#save` on the main model and neste
 Nesting forms only requires readers for the nested properties as `Album#songs`.
 
 
-## Rails Integration
+## Reform-Rails
 
-Rails and Reform work together out-of-the-box.
+The `reform` gem itself doesn't contain any Rails-specific code but will still work, e.g. for JSON APIs. For extensive Rails support, add the [`reform-rails` gem](https://github.com/trailblazer/reform-rails).
 
-However, you should know about two things.
+```ruby
+gem "reform", ">= 2.2.0"
+gem "reform-rails"
+```
+
+Per default, `reform-rails` will assume you want `ActiveModel::Validations` as the validation engine. This will include the following into `Reform::Form`.
+
+* `Form::ActiveModel` for form builder compliance so your form works with `form_for` and friends.
+* `Reform::Form::ActiveModel::FormBuilderMethods` to make Reform consume Rails form builder's weird parameters, e.g. `{song_attributes: { number: 1 }}`.
+* Uniqueness validation for `ActiveRecord`.
+
+However, you can also use the new, [recommended `dry-validation`](validation.html#dry-validation) backend, and you should check that out!
+
+To do so, add the gem to your Gemfile.
+
+```ruby
+gem "reform", ">= 2.2.0"
+gem "reform-rails"
+gem "dry-validation"
+```
+
+And configure Reform in `config/application.rb` to load the new validation backend.
+
+```ruby
+class Application < Rails::Application
+  # ..
+  config.reform.validations = :dry
+end
+```
+
+Make sure you use the API when writing dry validations.
+
+## Reform-Rails: Troubleshooting
 
 1. In case you explicitely _don't_ want to have automatic support for `ActiveRecord` or `Mongoid` and form builder: `require reform/form`, only.
 2. In some setups around Rails 4 the `Form::ActiveRecord` module is not loaded properly, usually triggering a `NoMethodError` saying `undefined method 'model'`. If that happened to you, `require 'reform/rails'` manually at the bottom of your `config/application.rb`.
