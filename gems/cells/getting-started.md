@@ -52,47 +52,27 @@ Please note that `trailblazer-cells` simply loads the `cells` gem and then adds 
 
 Cut the `%nav` fragment from the original `layout.html.haml` and replace it with the cell invocation.
 
-<div class="tabs">
-  <ul>
-    <li><a href="#invoc-rb">Ruby</a></li>
-    <li><a href="#invoc-ra">Rails</a></li>
-    <li><a href="#invoc-sn">Sinatra</a></li>
-    <li><a href="#invoc-hn">Hanami</a></li>
-  </ul>
 
-  <div id="invoc-rb">
-{% highlight haml %}
-%html
-  %head
+{% tabs invocation %}
+~~Ruby
+    %html
+      %head
 
-  %body
-    = Pro::Cell::Navigation.(nil, current_user: current_user).()
-{% endhighlight %}
+      %body
+        = Pro::Cell::Navigation.(nil, current_user: current_user).()
 
-    <p>
-      Cells can be invoked using the call style.
-    </p>
-  </div>
+Cells can be invoked using the call style.
 
-  <div id="invoc-ra">
+~~Rails
+    %html
+      %head
 
-{% highlight ruby %}
-%html
-  %head
+      %body
+        = cell(Pro::Cell::Navigation, nil, current_user: current_user)
 
-  %body
-    = cell(Pro::Cell::Navigation, nil, current_user: current_user)
-{% endhighlight %}
+In Rails, you can use the handy `cell` helper to invoke the view model.
 
-    <p>
-      In Rails, you can use the handy <code>cell</code> helper to invoke the view model.
-    </p>
-  </div>
-
-  <div id="invoc-sn">
-
-  </div>
-</div>
+{% endtabs %}
 
 <script type="text/javascript">
 $( ".tabs" ).tabs({
