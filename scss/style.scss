@@ -16,6 +16,7 @@
 @import "components/code_boxes";
 @import "components/guides";
 @import "components/pro";
+@import "components/jquery_ui_tabs";
 
 //Layout
 @import "layout/footer";
@@ -27,5 +28,6 @@
 @import "dark";
 
 @import "slick", "slick-theme"; // from bower_components.
+@import "jquery-ui";
 
 /* this file gets compiled by grunt into an application-wide /css/style.css file! */
