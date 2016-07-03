@@ -1,0 +1,65 @@
+$code-block-background-color: #232324;
+.code-content {
+  .tabs-content {
+    padding-left: rem-calc(16);
+    padding-right: rem-calc(16);
+  }
+
+  .tabs {
+    .tab-title {
+      a {
+        color: $side-nav-link-color;
+        &:hover {
+          color: $side-nav-link-color-hover;
+          background: $side-nav-link-bg-hover;
+        }
+      }
+      &.code-only {
+        &.active {
+          a {
+            background: $code-block-background-color;
+            color: white;
+            &:hover {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .code-only {
+    .tabs {
+      line-height: 1;
+      //padding-left: 1em;
+      .tab-title {
+        a {
+          //border-top-left-radius: 4px;
+          //border-top-right-radius: 4px;
+          font-size: 0.8rem;
+        }
+
+        &.active {
+          a {
+            background: $code-block-background-color;
+            color: white;
+            &:hover {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+
+    .tabs-content, .content {
+      background: transparent;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      pre {
+        margin-top: 0;
+      }
+    }
+  }
+}

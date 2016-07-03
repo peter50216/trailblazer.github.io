@@ -22,6 +22,9 @@ Since this is quite a bit of logic, it's a good idea to encapsulate that into an
 
 Here's what the old legacy `layout.html.haml` looks like.
 
+{% tabs code %}
+~~HAML
+
     %html
       %head
 
@@ -35,6 +38,28 @@ Here's what the old legacy `layout.html.haml` looks like.
                 %img{src: avatar_url}
               - else
                 "SIGN IN"
+
+~~ERB
+
+    <html>
+      <head></head>
+
+      <body>
+        <nav class="top-bar">
+          <ul>
+            <li>SUPPORT CHAT</li>
+            <li>GUIDES</li>
+            <li>
+              <% if signed_in? %>
+                <img src="<%= avatar_url %>">
+              <% else %>
+                SIGN IN
+              <% end %>
+            </li>
+      </body>
+    </html
+
+{% endtabs %}
 
 Of course, this navigation bar doesn't really make sense without any links added. I've left that out so we can focus on the structure. We will discuss how helpers work in the per-framework sections below.
 
@@ -63,23 +88,52 @@ Please note that `trailblazer-cells` simply loads the `cells` gem and then adds 
 
 Cut the `%nav` fragment from the original `layout.html.haml` and replace it with the cell invocation.
 
-
-{% tabs invocation %}
+{% tabs %}
 ~~Ruby
+{% tabs code %}
+
+~~HAML
     %html
       %head
 
       %body
         = Pro::Cell::Navigation.(nil, current_user: current_user).()
 
+~~ERB
+
+    <html>
+      <head></head>
+
+      <body>
+        <%= Pro::Cell::Navigation.(nil, current_user: current_user).() %>
+      </body>
+    </html>
+{% endtabs %}
+
 Cells can be invoked using the call style.
 
 ~~Rails
+
+{% tabs code %}
+~~HAML
+
     %html
       %head
 
       %body
         = cell(Pro::Cell::Navigation, nil, current_user: current_user)
+
+~~ERB
+
+    <html>
+      <head></head>
+
+      <body>
+        <%= cell(Pro::Cell::Navigation, nil, current_user: current_user) %>
+      </body>
+    </html>
+
+{% endtabs %}
 
 In Rails, you can use the handy `cell` helper to invoke the view model.
 

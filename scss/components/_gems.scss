@@ -34,6 +34,25 @@ $disposable-color: #8714AD;
       color: darken($color, 10%);
       }
     }
+
+    .tabs {
+      .tab-title {
+        &.active {
+          a {
+            background: lighten($color, 10%);
+            color: white;
+            &:hover {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    .tabs-content {
+      border: 1px solid lighten($color, 40%);
+      background: lighten($color, 60%);
+    }
   }
 }
 
