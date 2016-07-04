@@ -482,13 +482,10 @@ gem "reform-rails"
 gem "dry-validation"
 ```
 
-And configure Reform in `config/application.rb` to load the new validation backend.
+And configure Reform in an initializer, e.g. `config/initializer/reform.rb` to load the new validation backend.
 
 ```ruby
-class Application < Rails::Application
-  # ..
-  config.reform.validations = :dry
-end
+ Rails.application.config.reform.validations = :dry
 ```
 
 Make sure you use the API when writing dry validations.

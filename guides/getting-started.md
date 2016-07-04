@@ -44,3 +44,29 @@ Note that you need to invoke the loader manually. Usually, this would happen in 
 {% endtabs %}
 
 
+## Configuration
+
+You can configure what validation engine you want to use.
+
+{% tabs %}
+~~Rails
+In Rails, use an initializer, e.g. `config/initializer/trailblazer.rb` for that.
+
+    Rails.application.config.reform.validations = :dry
+
+If omitted, `ActiveModel::Validations` will be configured, per default.
+~~Ruby
+
+To set the default validation engine, it's easiest to monkey-patch Reform itself.
+
+    Reform::Form.send(:feature, Reform::Form::ActiveModel::Validations)
+
+For `dry-validations`:
+
+    Reform::Form.send(:feature, Reform::Form::Dry)
+
+Simply for a matter of readability, this should be done before you start defining forms.
+
+{% endtabs %}
+
+Note that you can still use alternative validations per form class.
