@@ -13,6 +13,7 @@ $code-block-background-color: #232324;
           color: $side-nav-link-color-hover;
           background: $side-nav-link-bg-hover;
         }
+        outline: none;
       }
       &.code-only {
         &.active {
