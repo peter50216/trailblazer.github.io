@@ -5,6 +5,8 @@ title: "Reform Validation"
 
 # Validation
 
+Validation in Reform happens in the `validate` method, and only there.
+
 Since Reform 2.0, you can pick your validation backend. This can either be `ActiveModel::Validations` or `dry-validation`.
 
 <div class="panel">
