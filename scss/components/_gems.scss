@@ -6,6 +6,7 @@ $reform-color: #F04694;
 $representable-color: #10A6F7;
 $roar-color: #F4A608;
 $disposable-color: #8714AD;
+$generic-color: #D52027;
 
 /* Gems block list */
 
@@ -77,4 +78,8 @@ $disposable-color: #8714AD;
 
 .disposable-body {
   @include gems-color($disposable-color)
+}
+
+.generic-body {
+  @include gems-color($generic-color)
 }
