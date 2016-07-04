@@ -7,7 +7,41 @@ title: "Reform Validation"
 
 Since Reform 2.0, you can pick your validation backend. This can either be `ActiveModel::Validations` or `dry-validation`.
 
-Reform 2.2 will drop ActiveModel-support. You can still use it (and it will work!), but we won't be actively maintaining it anymore. In other words, `ActiveModel::Validations` and Reform should be working until at least Reform 3.0.
+<div class="panel">
+  <p>
+    Reform 2.2 drops <code>ActiveModel</code>-support. You can still use it (and it will work!), but we won't maintain it actively, anymore. In other words, <code>ActiveModel::Validations</code> and Reform should be working until at least Reform 4.0.
+  </p>
+</div>
+
+## Refactoring Legacy Forms
+
+Note that you are not limited to one validation backend. When switching from ActiveModel::Validation to dry-validation, you should set the first as the default validation engine.
+
+{% tabs %}
+~~Rails
+The configuration assumes you have `reform-rails` installed.
+
+    config.reform.validations = :active_model
+
+~~Ruby
+In a Ruby environment, you'd usually monkey-patch the `Form` class.
+
+    Reform::Form.send(:include, Reform::Form::ActiveModel::Validations)
+{% endtabs %}
+
+In forms you're upgrading to dry-validation, you can include the validation module explicitly.
+
+    module Album::Contract
+      class Create < Reform::Form
+        feature Reform::Form::Dry # override the default.
+
+        validation do
+          required(:title).filled
+        end
+      end
+    end
+
+This replaces the ActiveModel backend with dry for this specific form class, only.
 
 ## Overview
 
