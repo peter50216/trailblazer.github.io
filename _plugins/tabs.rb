@@ -1,18 +1,21 @@
-require 'singleton'
-
 module Jekyll
   class TabsTag < Liquid::Block
     include Liquid::StandardFilters
 
-    def initialize(tag, options, *args)
+    def initialize(tag, options, liquid_options)
       super
-      @id = TabSequencer.instance.get_identifier
-      @code = options.include? "code" # This tab only contains a code block
+      @liquid_options = liquid_options
+      @filename       = liquid_options[:filename]
+      @code     = options.include? "code" # This tab only contains a code block
+      @panel_id = PanelID.instance[@filename] # ID for tabs block.
     end
 
     def identifier(index, name)
       slug = name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') # http://stackoverflow.com/questions/4308377/ruby-post-title-to-slug
-      sprintf("tabs-%s-%s-%s", @id, index, slug)
+      # slug #=> "rails"
+
+
+      sprintf("tabs-%s-%s-%s", @panel_id, index, slug)
     end
 
     def render(context)
@@ -52,15 +55,17 @@ module Jekyll
       )
     end
 
-    class TabSequencer
+    require "singleton"
+    class PanelID
       include Singleton
 
-      def initialize
-        @sequence = 0
+      def [](panel)
+        @ids[panel] ||= 0
+        @ids[panel] +=  1
       end
 
-      def get_identifier
-        @sequence += 1
+      def initialize
+        @ids = {}
       end
     end
   end
