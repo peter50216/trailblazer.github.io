@@ -28,6 +28,31 @@ Every twin is based on a schema which comes in form of a `Disposable::Twin` clas
 
 The self-explaining DSL known from many Trailblazer gems allows to define flat or nested twins.
 
+## Unnest
+
+To expose a nested property on an outer level, use `::unnest`.
+
+    class AlbumTwin < Disposable::Twin
+      property :artist do
+        property :email
+      end
+
+      unnest :email, from: :artist
+    end
+
+The `email` accessors will now be on top-level, hiding the nested structure to the outside world.
+
+    album = Album.find(1)
+    twin  = AlbumTwin.new(album)
+
+    twin.email #=> "duran@duran.to"
+    twin.email = "duran@duran.com"
+
+When `sync`ing, only the nested structure will be considered.
+
+    twin.sync
+    album.artist.email #=> "duran@duran.com"
+
 ## Public API
 
 The public twin API is unbelievably simple.
@@ -254,6 +279,90 @@ In addition to the standard `Array` API the collection adds a handful of additio
 
 Again, the model is left alone until you call `sync` or `save`.
 
+## JSONB
+
+The `JSONB` module allows working with generic hash fields with any level of nesting. Instead of clumsy hash operations, you have Ruby objects.
+
+<div class="panel">
+   <code>JSONB</code>'s not limited to Postgres' JSONB and hstore column type, but may also interact with a JSON or serialized-hash columns.
+</div>
+
+A serialized hash field must return a Ruby hash.
+
+    album = Album.find(1)
+    album.payload #=>
+      {
+        "title"=> "A View To A Kill",
+        "band" => {
+          "name" => "Duran Duran"
+        }
+      }
+
+Here, the `payload` field is such a serialized hash field.
+
+Letting the twin handle the hash field works via the `:jsonb` option.
+
+    require "disposable/twin/jsonb"
+
+    class Album::Twin < Disposable::Twin
+      feature Sync
+      include JSONB
+
+      property :id # or whatever you need.
+      property :payload, jsonb: true do
+        property :title
+        property :band do
+          property :name
+        end
+      end
+    end
+
+Note that you can have any level of nesting, and are free to use `collection`s.
+
+You get fully object-oriented access to your properties.
+
+```ruby
+twin = Album::Twin.new(album)
+
+twin.payload.band.name #=> "Duran Duran"
+```
+
+This works for writing, too.
+
+```ruby
+twin.payload.band.name = "James Bond"
+```
+
+After `sync`ing, the model's hash field will be updated.
+
+    album.payload #=>
+      {
+        "title"=> "A View To A Kill",
+        "band" => {
+          "name" => "James Bond"
+        }
+      }
+
+
+If you don't know the field names, you can define a scalar `property`.
+
+    class Album::Twin < Disposable::Twin
+      feature Sync
+      include JSONB
+
+      property :id # or whatever you need.
+      property :payload, jsonb: true do
+        property :title
+        property :band # scalar!
+      end
+    end
+
+This will return the native hash.
+
+    twin.payload.band #=> "band" => { "name" => "Duran Duran" }
+
+The `JSONB` module also works great with [::unnest](#unnest) and is a fantastic way to get rid of migrations and data that doesn't need a dedicated column.
+
 ## Twin Collections
 
 To twin a collection of models, you can use `::from_collection`.
@@ -304,53 +413,6 @@ AlbumTwin.new(album: album, cd: CD.find(1))
 
 Note that renaming works here, too.
 
-## Struct
-
-Twins can also map hash properties, e.g. from a deeply nested serialized JSON column.
-
-```ruby
-album.permissions #=> {admin: {read: true, write: true}, user: {destroy: false}}
-```
-
-Map that using the `Struct` module.
-
-```ruby
-class AlbumTwin < Disposable::Twin
-  property :permissions do
-     include Struct
-    property :admin do
-      include Struct
-      property :read
-      property :write
-    end
-
-    property :user # you don't have to use Struct everywhere!
-  end
-```
-
-You get fully object-oriented access to your properties.
-
-```ruby
-twin.permissions.admin.read #=> true
-```
-
-Note that you do not have to use `Struct` everywhere.
-
-```ruby
-twin.permissions.user #=> {destroy: false}
-```
-
-Of course, this works for writing, too.
-
-```ruby
-twin.permissions.admin.read = :MAYBE
-```
-
-After `sync`ing, you will find a hash in the model.
-
-```ruby
-album.permissions #=> {admin: {read: :MAYBE, write: true}, user: {destroy: false}}
-```
 
 ## With Representers
 
