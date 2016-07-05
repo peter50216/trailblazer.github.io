@@ -284,7 +284,7 @@ Again, the model is left alone until you call `sync` or `save`.
 The `JSONB` module allows working with generic hash fields with any level of nesting. Instead of clumsy hash operations, you have Ruby objects.
 
 <div class="panel">
-   <code>JSONB</code>'s not limited to Postgres' JSONB and hstore column type, but may also interact with a JSON or serialized-hash columns.
+   <code>JSONB</code>'s not limited to Postgres' JSONB and hstore column type, but may also interact with JSON or serialized-hash columns.
 </div>
 
 A serialized hash field must return a Ruby hash.
@@ -317,7 +317,7 @@ Letting the twin handle the hash field works via the `:jsonb` option.
       end
     end
 
-Note that you can have any level of nesting, and are free to use `collection`s.
+Note that you can have any level of nesting, and are free to use `collection`.
 
 You get fully object-oriented access to your properties.
 
@@ -359,7 +359,7 @@ If you don't know the field names, you can define a scalar `property`.
 
 This will return the native hash.
 
-    twin.payload.band #=> "band" => { "name" => "Duran Duran" }
+    twin.payload.band #=> { "band" => { "name" => "Duran Duran" } }
 
 The `JSONB` module also works great with [::unnest](#unnest) and is a fantastic way to get rid of migrations and data that doesn't need a dedicated column.
 
