@@ -23,3 +23,15 @@ $panel-font-color-alt: $white !default;
   border-width: 0.5px;
   background-color: #f2f2f2;
 }
+
+// TODO: merge with NEW from sidebar?
+.gem-version {
+  background-color: #f2f2f2;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 9pt;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+  margin-left: -6px
+}

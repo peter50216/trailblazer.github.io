@@ -279,12 +279,17 @@ In addition to the standard `Array` API the collection adds a handful of additio
 
 Again, the model is left alone until you call `sync` or `save`.
 
-## JSONB
+<a name="jsonb"></a>
 
-The `JSONB` module allows working with generic hash fields with any level of nesting. Instead of clumsy hash operations, you have Ruby objects.
+<h2>
+  Property::Hash
+  <span class="gem-version">0.3.2</span>
+</h2>
+
+The `Property::Hash` module allows working with generic hash fields with any level of nesting. Instead of clumsy hash operations, you have Ruby objects.
 
 <div class="panel">
-   <code>JSONB</code>'s not limited to Postgres' JSONB and hstore column type, but may also interact with JSON or serialized-hash columns.
+   This module is not limited to Postgres' JSONB and hstore column type, but may also interact with <a href="http://apidock.com/rails/v4.2.1/ActiveRecord/AttributeMethods/Serialization/ClassMethods/serialize">JSON or serialized-hash columns</a>.
 </div>
 
 A serialized hash field must return a Ruby hash.
@@ -300,16 +305,16 @@ A serialized hash field must return a Ruby hash.
 
 Here, the `payload` field is such a serialized hash field.
 
-Letting the twin handle the hash field works via the `:jsonb` option.
+Letting the twin handle the hash field works via the `:field` option.
 
-    require "disposable/twin/jsonb"
+    require "disposable/twin/property/hash"
 
     class Album::Twin < Disposable::Twin
       feature Sync
-      include JSONB
+      include Property::Hash
 
       property :id # or whatever you need.
-      property :payload, jsonb: true do
+      property :payload, field: :hash do
         property :title
         property :band do
           property :name
@@ -348,10 +353,10 @@ If you don't know the field names, you can define a scalar `property`.
 
     class Album::Twin < Disposable::Twin
       feature Sync
-      include JSONB
+      include Property::Hash
 
       property :id # or whatever you need.
-      property :payload, jsonb: true do
+      property :payload, field: :hash do
         property :title
         property :band # scalar!
       end
@@ -361,7 +366,7 @@ This will return the native hash.
 
     twin.payload.band #=> { "band" => { "name" => "Duran Duran" } }
 
-The `JSONB` module also works great with [::unnest](#unnest) and is a fantastic way to get rid of migrations and data that doesn't need a dedicated column.
+The `Property::Hash` module also works great with [::unnest](#unnest) and is a fantastic way to get rid of migrations and data that doesn't need a dedicated column.
 
 ## Twin Collections
 

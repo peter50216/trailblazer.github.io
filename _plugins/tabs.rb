@@ -4,23 +4,32 @@ module Jekyll
 
     def initialize(tag, options, liquid_options)
       super
-      @liquid_options = liquid_options
+      # @liquid_options = liquid_options
       @filename       = liquid_options[:filename]
       @code     = options.include? "code" # This tab only contains a code block
-      @panel_id = PanelID.instance[@filename] # ID for tabs block.
     end
 
     def identifier(index, name)
       slug = name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') # http://stackoverflow.com/questions/4308377/ruby-post-title-to-slug
       # slug #=> "rails"
 
-
       sprintf("tabs-%s-%s-%s", @panel_id, index, slug)
     end
 
     def render(context)
       markup = super
+
+      # in case the liquid "API" changes.
+      raise unless @filename
+      raise unless line_number
+      @panel_id = sprintf("%s-%s", @filename, line_number) # ID for tabs block.
+      @panel_id = @panel_id.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') # http://stackoverflow.com/questions/4308377/ruby-post-title-to-slug
+
       blocks = markup.split("~~").drop(1) # The first block starts with ~~, so drop everything before this first ~~.
+
+      # puts "@@@@@ #{@filename.inspect}"
+      #  pp line_number
+      # pp @filename
 
       tabs = {}
       blocks.each do |section|
@@ -53,20 +62,6 @@ module Jekyll
                     titles.join("\n"),
                     contents.join("\n")
       )
-    end
-
-    require "singleton"
-    class PanelID
-      include Singleton
-
-      def [](panel)
-        @ids[panel] ||= 0
-        @ids[panel] +=  1
-      end
-
-      def initialize
-        @ids = {}
-      end
     end
   end
 end
