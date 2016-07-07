@@ -94,7 +94,10 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
       <p>No business logic is allowed in controllers, only HTTP-related tasks like redirects.</p>
 
       <p>More <a id="trb-more">about Trailblazer →</a></p>
-      <!-- scripts -->
+
+      <script type="text/javascript">
+        $("#trb-more").click( function(e) { e.preventDefault(); $("button.slick-next").click() } );
+      </script>
     </div>
   </div>
 </div>
