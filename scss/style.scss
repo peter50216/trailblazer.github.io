@@ -29,6 +29,8 @@
 
 @import "dark";
 
-@import "slick", "slick-theme"; // from bower_components.
+@import "components/slick-carousel";
+
+
 
 /* this file gets compiled by grunt into an application-wide /css/style.css file! */

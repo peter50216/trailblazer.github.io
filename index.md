@@ -63,6 +63,7 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
 </div>
 -->
 
+<div id="code-slider">
 <div class="sub-section section-separator">
   <div class="row">
     <div class="columns">
@@ -143,10 +144,7 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
 
     def process(params)
       if validate(params[:comment])
-
-      else
-
-      end
+        # ..
     end
   end
       </code></pre>
@@ -257,25 +255,13 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
     <div class="columns medium-6">
       <pre><code class="ruby">
   class Comment::Cell < Cell::ViewModel
-    property :body
     property :author
-
-    def show
-      render
-    end
 
   private
     def author_link
       link_to "#{author.email}", author
     end
   end
-      </code></pre>
-      <pre>
-        <code class="html ruby">
-  &lt;div class="comment"&gt;
-    <%= body %>
-    By <%= author_link %>
-  &lt;/div&gt;
       </code></pre>
   </div>
   <div class="columns medium-6">
@@ -284,35 +270,6 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
       <p>Rails helpers can still be used but are limited to the cell's scope.</p>
     </div>
 </div>
-</div>
-
-
-<!-- View Model -->
-
-<div class="sub-section">
-  <div class="row">
-    <div class="columns">
-      <h2>Views</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="columns medium-6">
-      <pre><code class="ruby">
-  &lt;h1&gt;Comments for <%= @thing.name %>&lt;/h1&gt;
-
-  This was created <%= @thing.created_at %>
-
-    <%= concept("comment/cell",
-    collection: @thing.comments) %>
-      </code></pre>
-
-
-    </div>
-    <div class="columns medium-6">
-      <p>Controller views are still ok to use.</p>
-      <p>However, replacing huge chunks with cells is encouraged and will simplify your views.</p>
-    </div>
-  </div>
 </div>
 
 <!-- Representer -->
@@ -420,17 +377,14 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
     app
     ├── concepts
     │   ├── comment
-    │   │   ├── operations.rb
-    │   │   ├── cell.rb
-    │   │   ├── policy.rb
-    │   │   ├── views
+    │   │   ├── cell
+    │   │   │   └── show.rb
+    │   │   ├── operation
+    │   │   │   ├── create.rb
+    │   │   │   └── update.rb
+    │   │   ├── view
     │   │   │   ├── show.haml
-    │   │   │   ├── list.haml
-    │   │   │   ├── comment.css.sass
-    │   │   └── twin.rb
-    │   │
-    │   └── post
-    │       └── operations.rb
+    │   │   │   └── list.haml
         </code>
 
       </pre>
@@ -448,5 +402,6 @@ description: "Trailblazer introduces additional abstraction layers into Ruby fra
     </div>
 
   </div>
+</div>
 </div>
 
